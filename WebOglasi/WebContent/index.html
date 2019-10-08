@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="jquery-3.3.1.min.js"></script>
+<meta charset="utf-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="stilovi.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="./JavaScriptFiles/main.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/Registration.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/Admin.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/Category.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/Ad.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/HomePage.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/User.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/Message.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/Recension.js"  type="text/javascript" charset="utf-8"></script>
+<script src="./JavaScriptFiles/Find.js"  type="text/javascript" charset="utf-8"></script>
+
+
+
+<title>WebOglasi</title>
+</head>
+<body style="background-color: white">
+	<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Web Oglasi</h1>      
+    <p>online servis za oglase</p>
+  </div>
+</div>
+
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-left">
+        <li class="active" onclick="homePageClick()"><a href="#">Početna</a></li>
+        <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kategorije
+	        <span class="caret"></span></a>
+	        <ul id="categoriesUl" class="dropdown-menu">
+	          <li><a href="#">Domaća kuhinja</a></li>
+	  
+	        </ul>
+	    </li>
+        <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pretraga
+	        <span class="caret"></span></a>
+	        <ul id="categoriesUl" class="dropdown-menu">
+	        	<li><a onclick="showFindAd()" >Oglasa</a></li>
+	       	    <li><a onclick="showFindUser()" >Korisnika</a></li>  
+	        </ul>
+	    </li>
+        <li style="display: none;"><a href="#">Omiljeni</a></li>
+      </ul>
+      
+      <ul  class="nav navbar-nav navbar-right">
+        <li id="nalog" style="display: none;"><a id="txtnalog" href="#" ><span class="glyphicon glyphicon-user" ></span></a></li>      
+      	<li  id="sellerlikesLi" style="display: none;"><a id="likeLi" href="#" ><span class="glyphicon glyphicon-thumbs-up" ></span></a></li>      
+      	<li  id="sellerDislikesLi" style="display: none;"><a id="dislikeLi" href="#" ><span class="glyphicon glyphicon-thumbs-down" ></span></a></li>      
+      	<li id="allAdsAdminli" onclick="adminShowAllAds()" style="display: none;"><a ><span class="" ></span> Svi oglasi</a></li>      
+      	<li id="categoriesli" onclick="adminShowCategories()" style="display: none;"><a href="#" ><span class="" ></span>Kategorije</a></li>      
+      	<li id="usersli" onmousedown="getAllUsers()" style="display: none;"><a href="#" ><span class="" ></span>Korisnici</a></li>      
+      	<li style="display: none;" id="sellerAdsNav" class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Oglasi
+	        <span class="caret"></span></a>
+	        <ul id="categoriesUl" class="dropdown-menu">
+	        	<li><a onclick="showMyActiveAds()" >Aktivni</a></li>
+	       	    <li><a onclick="showMyInRealizationAds()" >U realizaciji</a></li>
+	       	   	<li><a onclick="showMyRealizedAds()" >Realizovani</a></li>	  
+	        </ul>
+	    </li>
+	    <li style="display: none;" id="buyerAdsNav" class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Oglasi
+	        <span class="caret"></span></a>
+	        <ul id="categoriesUl" class="dropdown-menu">
+	        	<li><a onclick="showMyDeliveredAds()" >Dostavljeni</a></li>
+	       	    <li><a onclick="showMyOrderedAds()" >Poručeni</a></li>
+	       	   	<li><a onclick="showMyFavouritesAds()" >Omiljeni</a></li>	  
+	        </ul>
+	    </li>
+        <li id="userRecensionsli" onclick="userRecensions()" style="display: none;"><a href="#" ><span class="" ></span>Recenzije</a></li>      
+        <li id="sellerRecensionsli" onclick="sellerRecension()" style="display: none;"><a href="#" ><span class="" ></span>Recenzije</a></li>      
+        
+        <li id="addAdli" onclick="addAdFormShow()" style="display: none;"><a href="#" ><span class="" ></span>Dodaj oglas</a></li>              
+        <li id="newMessageli" onmousedown="newMessageShow()" style="display: none;"><a href="#" ><span class="" ></span>Nova poruka</a></li>      
+        <li style="display: none;" id="messagesli" class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Poruke
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	        	<li><a onclick="myInboxMessages()" >Primljene</a></li>
+	       	    <li><a onclick="mySentMessages()" >Poslate</a></li>
+	        </ul>
+	    </li>
+        
+        <!-- li id="orderedAdsli" onclick="orderedAdsShow()" style="display: none;"><a href="#" ><span class="" ></span>Poručeni</a></li>            
+      	<li id="deliveredAdsli" onclick="deliveredAdsShow()" style="display: none;"><a href="#" ><span class="" ></span>Isporučeni</a></li>      
+       	<li id="favouriteAdsli" onclick="favouriteAdsShow()" style="display: none;"><a href="#" ><span class="" ></span>Omiljeni</a></li-->      
+      	
+      	<li id="loggoutButton" style="display: none;" ><a href='#'><button type="button" onclick="logout()"  class="btn btn-primary btn-primary-spacing">Odjava</button></a></li	>      
+      	
+      </ul>
+      
+      <form id="signin" class="navbar-form navbar-right" role="form">
+           	<div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input id="emaillog" type="text" class="form-control" name="email" value="" placeholder="Korisničko ime">                                        
+            </div>
+
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input id="passwordlog" type="password" class="form-control" name="password" value="" placeholder="Lozinka">                                        
+            </div>
+
+       		<button type="button" onclick="login()"  class="btn btn-primary ">Prijava</button>
+       		<button type="button" onclick="registrationClick()" class="btn btn-primary btn-primary-spacing">Registrujte se</button>
+       </form>  
+    </div>
+  </div>
+</nav>
+  <div style="background-color: white" hidden="hidden" id="registrationForm" class="container">
+    <div  class="row main">
+      <div  class="panel-heading">
+               <div class="panel-title text-center">
+                   <h1 class="title">Registracija</h1>
+                   <hr />
+                 </div>
+            </div> 
+      <div id="regdiv1" class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Ime</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" required="required" class="form-control" name="ime" id="nameReg"  placeholder="Unesite ime"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="prezime" class="cols-sm-2 control-label">Prezime</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="name" id="surnameReg"  placeholder="Unesite prezime"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">E-Mail adresa</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="email" id="emailReg"  placeholder="Unesite vašu e-mail adresu"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="cols-sm-2 control-label">Korisničko ime</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="username" id="usernameReg"  placeholder="Unesite vaše korisničko ime"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="cols-sm-2 control-label">Lozinka</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" name="password" id="passwordReg"  placeholder="Unesite lozinku"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm" class="cols-sm-2 control-label">Potvrda lozinke</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" name="confirmname" id="confirmReg"  placeholder="Ponovite unos lozinke"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefon" class="cols-sm-2 control-label">Broj telefona</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="telefonname" id="phoneReg"  placeholder="Unesite broj telefona"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="telefon" class="cols-sm-2 control-label">Grad</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="telefonname" id="cityReg"  placeholder="Unesite grad"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group ">
+            <button type="button" onClick="registration()" class="btn btn-primary btn-lg btn-block login-button">Registracija</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- TABELA KORISNICI -->
+	<div hidden="hidden" id="allUsersDiv">
+	<table  class="table table-hover" id="allUsersTable">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">KORISNICI</th>
+		      <th scope="col">Korisničko ime</th>
+		      <th scope="col">Ime</th>
+		      <th scope="col">Prezime</th>
+		      <th scope="col">E-Mail</th>
+		      <th scope="col">Kontakt telefon</th>
+		      <th scope="col">Grad</th>
+		      <th scope="col">Uloga</th>
+		      <th scope="col">Markiran</th>
+		      <th scope="col">Sačuvaj izmenu</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		   
+		   
+		  </tbody>
+	</table>
+  </div>
+  
+  	<!-- UNOS Kategorije -->
+	<div hidden="hidden" id="addCategoryForm" class="container">
+    <div  class="row main">
+      <div  class="panel-heading">
+               <div class="panel-title text-center">
+                   <h1 class="title">Kategorija</h1>
+                   <hr />
+                 </div>
+            </div> 
+      <div  class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Naziv:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" required="required" class="form-control" name="naziv" id="nameCategory"  placeholder="Unesite naziv kategorije"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Opis:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <textarea required="required" class="form-control" name="naziv" id="descriptionCategory"  placeholder="Unesite opis:" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group ">
+            <button id="addCategoryButton" type="button" onClick="addCategory()" class="btn btn-primary btn-lg btn-block login-button">Dodaj</button>
+         	<button id="editCategoryButton" type="button" onClick="editCategory()" class="btn btn-primary btn-lg btn-block login-button">Izmeni</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--Kategorije tabelaa-->
+<div hidden="hidden" id="allCategoriesDiv">
+	<table  class="table table-hover" id="allCategoriesTable">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Kategorije</th>
+		      <th scope="col">Naziv</th>
+          <th scope="col">Opis</th>
+		      <th scope="col"><button type="button" onclick="addCategoryClick()" class="btn btn-primary">Dodaj kategoriju</button></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		   
+		   
+		  </tbody>
+	</table>
+  </div>
+  
+  <!-- UNOS Oglasa -->
+	<div hidden="hidden" id="addAdForm" class="container">
+    <div  class="row main">
+      <div  class="panel-heading">
+               <div class="panel-title text-center">
+                   <h1 class="title">Oglas</h1>
+                   <hr />
+                 </div>
+            </div> 
+      <div  class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+        
+        <div id="catOfAdDiv" class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Kategorija oglasa:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <select onchange="selectedCategoryChanged()" id="selectCategoryForAdId" style="height: 30px;"></select>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Naziv:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" required="required" class="form-control" name="naziv" id="addAdName"  placeholder="Unesite naziv oglasa"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Cena:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="number" required="required" class="form-control" name="naziv" id="addAdPrice"  placeholder="Unesite naziv oglasa"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Opis:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <textarea required="required" class="form-control" name="naziv" id="addAdDescription"  placeholder="Unesite opis:" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Grad:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" required="required" class="form-control" name="naziv" id="addAdCity"  placeholder="Unesite naziv oglasa"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+          
+        	<!--  label class="cols-sm-2 control-label">Odaberite sliku:</label>
+        	<input id="adImageSelection" onchange='imageSelected(this)' class="form-control" name="iamge" type="file"-->
+        	<div class="file-field">
+
+                  <div id = "plavaBoja" class="btn btn-primary btn-sm float-left">
+                    <input onchange="adImageSelected()" required type="file" accept="image/*" id = "adImage">
+                  </div>      
+                </div>
+    	</div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Datum isticanja:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="date" required="required" class="form-control" name="naziv" id="addAdDate" "/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group ">
+            <button id="addAdButton" type="button" onClick="addAd()" class="btn btn-primary btn-lg btn-block login-button">Dodaj</button>
+         	<button id="editAdButton" type="button" onClick="editAd()" class="btn btn-primary btn-lg btn-block login-button">Izmeni</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- OGLASI -->
+  <div id="adsShowingDiv" class="container">
+    <div id="adsShowingDiv2" class="row">
+        
+        
+    </div>
+</div>
+
+<!-- NOVA PORUK -->
+	<div hidden="hidden" id="newMessageForm" class="container">
+    	<div  class="row main">
+      		<div  class="panel-heading">
+               <div class="panel-title text-center">
+                   <h1 class="title">Poruka</h1>
+                   <hr />
+                 </div>
+            </div> 
+      <div  class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Naziv oglasa:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" required="required" class="form-control" name="naziv" id="nameAdNewMessage"  placeholder="Unesite naziv oglasa"/>
+              </div>
+            </div>
+          </div>
+          
+          <div id="primalacDiv" class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Primalac:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <select onchange="selectedMessageReceiverChanged()" id="selectReceiverForMessageId" style="height: 30px;"></select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Naslov poruke:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" required="required" class="form-control" name="naziv" id="titleNewMessage"  placeholder="Unesite naslov"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Sadržaj:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <textarea required="required" class="form-control" name="naziv" id="textNewMessage"  placeholder="" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group ">
+            <button id="addMessageButton" type="button" onClick="sendMessage()" class="btn btn-primary btn-lg btn-block login-button">Pošalji</button>
+         	<button id="editMessageButton" type="button" onClick="editMessage()" class="btn btn-primary btn-lg btn-block login-button">Izmeni</button>
+          	<button id="answerButton" type="button" onClick="responseMessage()" class="btn btn-primary btn-lg btn-block login-button">Odgovori</button>
+          	
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- PORUKE -->
+  <div id="messagesDiv" class="container">
+    <div id="messagesDiv1">
+        
+    </div>
+</div>
+<!-- OGLAS DETALJNO -->
+<div id="adDetailsDiv" class="container emp-profile">
+                      
+ </div>
+ 
+ 
+ <!-- NOVA RECENZIJA -->
+	<div hidden="hidden" id="newRecensionForm" class="container">
+    	<div  class="row main">
+      		<div  class="panel-heading">
+               <div class="panel-title text-center">
+                   <h1 class="title">Recenzija</h1>
+                   <hr />
+                 </div>
+            </div> 
+      <div  class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Naslov recenzije:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" required="required" class="form-control" name="naziv" id="newRecensionTitle"  placeholder="Unesite naslov recenzije:"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Sadržaj:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <textarea required="required" class="form-control" name="naziv" id="newRecensionText"  placeholder="" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Da li je opis oglasa tačan:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="checkbox" checked required="required" class="form-control" name="naziv" id="newRecensionCorrect"></input>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Dogovor ispoštovan:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="checkbox" checked class="form-control" name="naziv" id="newRecensionRespect"></input>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+	          <div class="file-field">
+	          	<div id = "plavaBoja" class="btn btn-primary btn-sm float-left">
+	    	        <input onchange="recensionImageSelected()" required type="file" accept="image/*" id = "newRecensionImage">
+	           </div>     
+           	</div>
+    	 </div>
+          
+          <div class="form-group ">
+            <button id="addRecensionButton" type="button" onClick="addRecension()" class="btn btn-primary btn-lg btn-block login-button">Pošalji</button>
+         	<button id="editRecensionButton" type="button" onClick="editRecension()" class="btn btn-primary btn-lg btn-block login-button">Izmeni</button>
+          	<button id="sellerRecensionButton" type="button" onClick="addSellerRecension()" class="btn btn-primary btn-lg btn-block login-button">Pošalji</button>
+          	
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Recenzije -->
+  <div id="recensionsDiv" class="container">
+    <div id="recensionsDiv1">
+        
+    </div>
+</div>
+	
+	<!-- PRETRAGA USER -->
+	<div hidden="hidden" id="findUserForm" class="container">
+    	<div  class="row main">
+      		<div  class="panel-heading">
+               <div class="panel-title text-center">
+                   <h1 class="title">Pronađi korisnika</h1>
+                   <hr />
+                 </div>
+            </div> 
+      <div  class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Korisničko ime:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="naziv" id="findUsername"  placeholder=""/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Grad:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <textarea required="required" class="form-control" name="naziv" id="findCity"  placeholder="" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="form-group ">
+            <button id="findUserButton" type="button" onClick="findUser()" class="btn btn-primary btn-lg btn-block login-button">Pronađi</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>	
+  
+  	<!-- PRETRAGA OGLASA -->
+	<!-- div hidden="hidden" id="findAdForm" class="container">
+    	<div  class="row main">
+      		<div  class="panel-heading">
+               <div class="panel-title text-center">
+                   <h1 class="title">Pronađi oglas</h1>
+                   <hr />
+                 </div>
+            </div> 
+      <div  class="main-login main-center">
+        <form class="form-horizontal" method="post" action="#">
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Korisničko ime:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="naziv" id="findAdName"  placeholder=""/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Grad:</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <textarea required="required" class="form-control" name="naziv" id="findCity"  placeholder="" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="form-group ">
+            <button id="findUserButton" type="button" onClick="findUser()" class="btn btn-primary btn-lg btn-block login-button">Pronađi</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div-->	
+  
+  
+
+</body>
+</html>
